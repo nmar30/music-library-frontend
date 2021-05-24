@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import MusicTable from './components/MusicTable/MusicTable'
+import SongForm from './components/SongForm/SongForm'
 
 class App extends Component {
     constructor(props){
@@ -15,15 +16,23 @@ class App extends Component {
     }
     
     async getSongs() {
-        let response = await axios.get('http://127.0.0.1:8000/music')
-        this.setState({
-            songs: response.data
-        })
+        try{
+            let response = await axios.get('http://127.0.0.1:8000/music/')
+            this.setState({
+                songs: response.data
+            })
+        }
+        catch (error){
+            console.log('Not gathering')
+        }
     }
 
-    async deleteSong(props) {
-        let response = await axios.delete('http://127.0.0.1:8000/music/'[props.song.id])
-        this.getSongs()
+    async deleteSong(songid) {
+        axios.delete(`http://127.0.0.1:8000/music/${songid}`)
+    }
+
+    async addSong(song) {
+        await axios.post('http://127.0.0.1:8000/music/', song)
     }
 
     renderTable = () => {
@@ -53,6 +62,7 @@ class App extends Component {
                     {this.renderTable()}
                 </tbody>
             </table>
+            <SongForm addSong={this.addSong.bind(this)}/>
         </div>
         );
     }
