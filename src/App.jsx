@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import MusicTable from './components/MusicTable/MusicTable'
-import SongForm from './components/SongForm/SongForm'
+import MusicTable from './components/MusicTable/MusicTable';
+import SongForm from './components/SongForm/SongForm';
+import SearchBar from './components/SearchBar/SearchBar'
 
 class App extends Component {
     constructor(props){
@@ -37,6 +38,15 @@ class App extends Component {
         this.getSongs()
     }
 
+    searchSongs(search_query){
+        console.log(search_query)
+        const filtered_results = this.state.songs.filter(song => 
+            song.title.includes(search_query) || song.artist.includes(search_query) || song.album.includes(search_query) || song.genre.includes(search_query) || song.release_date.includes(search_query))
+        this.setState({
+            songs: filtered_results
+        })
+    }
+
     renderTable() {
         return (
             this.state.songs.map((song) => 
@@ -49,6 +59,7 @@ class App extends Component {
         return (
         <div className="container">
             <h1>Music Library</h1>
+            <SearchBar searchSongs={this.searchSongs.bind(this)} />
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
