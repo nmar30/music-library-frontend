@@ -41,33 +41,32 @@ class SongCreator extends Component {
 
     render() { 
         return ( 
-            <div>
             <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label>Title: </label>
-                    <input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
-                </div>
-                <div>
-                    <label>Album: </label>
-                    <input type='text' name='album' value={this.state.album} onChange={this.handleChange} />
-                </div>
-                <div>
-                    <label>Artist: </label>
-                    <input type='text' name='artist' value={this.state.artist} onChange={this.handleChange} />
-                </div>
-                <div>
-                    <label>Genre: </label>
-                    <input type='text' name='genre' value={this.state.genre} onChange={this.handleChange} />
-                </div>
-                <div>
-                    <label>Release Date: </label>
-                    <input type='date' name='release_date' value={this.state.release_date} onChange={this.handleChange} />
-                </div>
-                <div>
-                    <input type='submit' value='Add' />
-                </div>
-            </form> 
-            </div>
+                <table className="table">
+                    <tbody>
+                        <tr className="table-success">
+                            <td>
+                                <input type='text' name='title' value={this.state.title} onChange={this.handleChange} placeholder='Title' />      
+                            </td>
+                            <td>
+                                <input type='text' name='album' value={this.state.album} onChange={this.handleChange} placeholder='Album' />
+                            </td>
+                            <td>
+                                <input type='text' name='artist' value={this.state.artist} onChange={this.handleChange} placeholder='Artist' />
+                            </td>
+                            <td>
+                                <input type='text' name='genre' value={this.state.genre} onChange={this.handleChange} placeholder='Genre' />
+                            </td>
+                            <td>
+                                <input type='date' name='release_date' value={this.state.release_date} onChange={this.handleChange} placeholder='Release Date' />
+                            </td>
+                            <td>
+                                <input type='submit' value='Add' className="btn btn-success" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
          );
     }
 }
