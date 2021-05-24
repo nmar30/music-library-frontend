@@ -28,17 +28,19 @@ class App extends Component {
     }
 
     async deleteSong(songid) {
-        axios.delete(`http://127.0.0.1:8000/music/${songid}`)
+        await axios.delete(`http://127.0.0.1:8000/music/${songid}`).then(response => {console.log(response)});
+        this.getSongs()
     }
 
     async addSong(song) {
         await axios.post('http://127.0.0.1:8000/music/', song)
+        this.getSongs()
     }
 
-    renderTable = () => {
+    renderTable() {
         return (
             this.state.songs.map((song) => 
-            <MusicTable song={song} deleteSong={this.deleteSong}/>
+            <MusicTable song={song} deleteSong={this.deleteSong.bind(this)} getSongs={this.getSongs.bind(this)}/>
             )
         )
     }
